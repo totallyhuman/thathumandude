@@ -22,7 +22,7 @@ def add_error(match, meta):
 	meta['self'].send_chat('Thank you for your feedback. Message will be delivered to ' + nick_mono + '.')
 	
 def check_errors(match, meta):
-	if meta['sender'] == nick_mono || meta['sender'] == ':3':
+	if meta['sender'] == nick_mono or meta['sender'] == ':3':
 		for e in errors:
 			meta['self'].send_chat(errors[e], meta['msgid'])
 			del errors[e]
