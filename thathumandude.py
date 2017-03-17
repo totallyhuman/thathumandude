@@ -18,12 +18,16 @@ def uptime(match, meta):
 		format_delta(time.time() - meta['self'].started)), meta['msgid'])
 
 def add_error(match, meta):
-	errors.append('[' + meta['sender'] + '] ' + match.group(1))
+	errors.append('[' + meta['sender'] + ', ' + format_datetime(time.time()) + '] ' + match.group(1))
 	meta['self'].send_chat('Thank you for your feedback. Message will be delivered to ' + nick_mono + '.')
 	
 def check_errors(match, meta):
-	for e in errors:
-		meta['self'].send_chat(e, meta['msgid'])
+	if meta['sender'] == nick_mono || meta['sender'] == ':3':
+		for e in errors:
+			meta['self'].send_chat(errors[e], meta['msgid'])
+			del errors[e]
+	else:
+		meta['self'].send_chat('Why do you care? It\'s not your bot. :P', meta['msgid'])
 	
 def kill(match, meta):
 	meta['self'].send_chat('/me is exiting.', meta['msgid'])
