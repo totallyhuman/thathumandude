@@ -13,7 +13,7 @@ def facepalm(match, meta):
 		meta['self'].send_chat('Stop hitting yourself!', meta['msgid'])
 
 def uptime(match, meta):
-	meta['self'].send_chat('/me is up since %s (%s).' % (
+	meta['self'].send_chat('/me has been up since %s (%s).' % (
 		format_datetime(meta['self'].started),
 		format_delta(time.time() - meta['self'].started)), meta['msgid'])
 	
