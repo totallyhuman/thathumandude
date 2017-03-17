@@ -18,13 +18,13 @@ def uptime(match, meta):
 		format_delta(time.time() - meta['self'].started)), meta['msgid'])
 
 def add_error(match, meta):
-	errors.append('[' + meta['sender'] + ', ' + format_datetime(time.time()) + '] ' + match.group(1))
-	meta['self'].send_chat('Thank you for your feedback. Message will be delivered to ' + nick_mono + '.')
+	errors.append({'sender': meta['msgid'], 'message': match.group(1), 'time': time.time()})
+	meta['self'].send_chat('Thank you for your feedback. Message will be delivered to ' + nick_mono + '.', meta['msgid'])
 	
 def check_errors(match, meta):
 	if meta['sender'] == nick_mono or meta['sender'] == ':3':
-		for e in errors:
-			meta['self'].send_chat(errors[e], meta['msgid'])
+		for e in range(0, len(errors)):
+			meta['self'].send_chat('[' + errors[e]['sender'] + ', ' + time.time() - errors[e]['time'] + '] ' + errors[e]['message'], meta['msgid'])
 			del errors[e]
 	else:
 		meta['self'].send_chat('Why do you care? It\'s not your bot. :P', meta['msgid'])
