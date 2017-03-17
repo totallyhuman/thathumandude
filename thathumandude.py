@@ -16,6 +16,9 @@ def uptime(match, meta):
 	meta['self'].send_chat('/me has been up since %s (%s).' % (
 		format_datetime(meta['self'].started),
 		format_delta(time.time() - meta['self'].started)), meta['msgid'])
+
+def error(match, meta):
+	meta['self'].send_chat('!notify @' + nick_sans + ' [' + meta['sender'] + '] ' + match.group(1))
 	
 def kill(match, meta):
 	meta['self'].send_chat('/me is exiting.', meta['msgid'])
@@ -46,6 +49,8 @@ regexes = {
 		'Pong!',
 	'^(\s+)?!creator\s+@?thathumandude(\s+)?$':
 		'/me was created by ' + nick_mono + '.',
+	'^(?:\s+)?!error\s+@?thathumandude(?:\s+)?(.*)$':
+		error,
 	'^(\s+)?!uptime\s+@?thathumandude(\s+)?$':
 		uptime,
 	'^(\s+)?!kill\s+@?thathumandude(\s+)?$':
