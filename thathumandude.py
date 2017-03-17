@@ -45,7 +45,7 @@ regexes = {
 	'(?i)^(\s+)?gimme\s+mah\s+nick,?\s+bot!?(\s+)?$':
 		nick_mono,
 	'(?i)@totallyhuman\b':
-		'@' + nick_mono,
+		'@%s' % nick_mono,
 	'(?i)^(\s+)?!THInbox(\s+)?$':
 		inbox,
 	'(?i)^(\s+)?/me\s+facepalms(\s+)?$':
@@ -59,7 +59,7 @@ regexes = {
 	'(?i)^(\s+)?!ping(\s+)?$':
 		'Pong!',
 	'(?i)^(\s+)?!creator\s+@?thathumandude(\s+)?$':
-		'/me was created by ' + nick_mono + '.',
+		'/me was created by %s.' % nick_mono,
 	'(?i)^(?:\s+)?!error\s+@?thathumandude(?:\s+)?(.*)$':
 		add_error,
 	'(?i)^(\s+)?!checkerrors\s+@?thathumandude(\s+)?$':
