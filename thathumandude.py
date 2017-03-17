@@ -19,12 +19,13 @@ def uptime(match, meta):
 
 def add_error(match, meta):
 	errors.append({'sender': meta['sender'], 'message': match.group(1), 'time': time.time()})
-	return 'Thank you for your feedback. Message will be delivered to ' + nick_mono + '.'
+	return 'Thank you for your feedback. Message will be delivered to %s.' % nick_mono
 	
 def check_errors(match, meta):
 	if meta['sender'] == nick_mono or meta['sender'] == ':3':
 		for e in range(0, len(errors)):
-			meta['self'].send_chat('[' + errors[e]['sender'] + ', ' + str(format_delta(time.time() - errors[e]['time'], False)) + ' ago] ' + errors[e]['message'], meta['msgid'])
+			meta['self'].send_chat('[%s, %s ago] %s' % (errors[e]['sender'], str(format_delta(time.time() - errors[e]['time'], False)), errors[e]['message']), meta['msgid'])
+			
 			del errors[e]
 	else:
 		return 'Why do you care? It\'s not your bot. :P'
@@ -36,8 +37,8 @@ def kill(match, meta):
 nick_sans = u'totally\U0001D5C1\U0001D5CE\U0001D5C6\U0001D5BA\U0001D5C7'
 nick_mono = u'totally\U0001D691\U0001D69E\U0001D696\U0001D68A\U0001D697'
 bot_nick = 'thathumandude'
-short_help = '/me is a bot to make pinging ' + nick_mono + ' easier.'
-long_help = 'I am a bot made by and for ' + nick_mono + '. I make pinging him easier.'
+short_help = '/me is a bot to make pinging %s easier.' % nick_mono
+long_help = 'I am a bot made by and for %s. I make pinging him easier.' % nick_mono
 errors = []
 
 regexes = {
