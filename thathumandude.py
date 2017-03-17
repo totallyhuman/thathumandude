@@ -17,8 +17,13 @@ def uptime(match, meta):
 		format_datetime(meta['self'].started),
 		format_delta(time.time() - meta['self'].started)), meta['msgid'])
 
-def error(match, meta):
-	meta['self'].send_chat('!notify @' + nick_sans + ' [' + meta['sender'] + '] ' + match.group(1))
+def add_error(match, meta):
+	errors.append('[' + meta['sender'] + '] ' + match.group(1))
+	meta['self'].send_chat('Thank you for your feedback. Message will be delivered to ' + nick_mono + '.')
+	
+def check_errors(match, meta):
+	for e in errors:
+		meta['self'].send_chat(e, meta['msgid'])
 	
 def kill(match, meta):
 	meta['self'].send_chat('/me is exiting.', meta['msgid'])
@@ -29,6 +34,7 @@ nick_mono = u'totally\U0001D691\U0001D69E\U0001D696\U0001D68A\U0001D697'
 bot_nick = 'thathumandude'
 short_help = '/me is a bot to make pinging ' + nick_mono + ' easier.'
 long_help = 'I am a bot made by and for ' + nick_mono + '. I make pinging him easier.'
+errors = []
 
 regexes = {
 	'^(\s+)?gimme\s+mah\s+nick,?\s+bot!?(\s+)?$':
@@ -50,7 +56,9 @@ regexes = {
 	'^(\s+)?!creator\s+@?thathumandude(\s+)?$':
 		'/me was created by ' + nick_mono + '.',
 	'^(?:\s+)?!error\s+@?thathumandude(?:\s+)?(.*)$':
-		error,
+		add_error,
+	'^(\s+)?!checkerrors\s+@?thathumandude(\s+)?$':
+		check_errors,
 	'^(\s+)?!uptime\s+@?thathumandude(\s+)?$':
 		uptime,
 	'^(\s+)?!kill\s+@?thathumandude(\s+)?$':
