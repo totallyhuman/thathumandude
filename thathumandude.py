@@ -41,31 +41,31 @@ long_help = 'I am a bot made by and for ' + nick_mono + '. I make pinging him ea
 errors = []
 
 regexes = {
-	'^(\s+)?gimme\s+mah\s+nick,?\s+bot!?(\s+)?$':
+	'(?i)^(\s+)?gimme\s+mah\s+nick,?\s+bot!?(\s+)?$':
 		nick_mono,
-	'@totallyhuman\b':
+	'(?i)@totallyhuman\b':
 		'@' + nick_mono,
-	'^(\s+)?!THInbox(\s+)?$':
+	'(?i)^(\s+)?!THInbox(\s+)?$':
 		inbox,
-	'^(\s+)?/me\s+facepalms(\s+)?$':
+	'(?i)^(\s+)?/me\s+facepalms(\s+)?$':
 		facepalm,
-	'^(\s+)?!help\s+@?thathumandude(\s+)?$':
+	'(?i)^(\s+)?!help\s+@?thathumandude(\s+)?$':
 		long_help,
-	'^(\s+)?!help(\s+)?$':
+	'(?i)^(\s+)?!help(\s+)?$':
 		short_help,
-	'^(\s+)?!ping\s+@?thathumandude(\s+)?$':
+	'(?i)^(\s+)?!ping\s+@?thathumandude(\s+)?$':
 		'Pong!',
-	'^(\s+)?!ping(\s+)?$':
+	'(?i)^(\s+)?!ping(\s+)?$':
 		'Pong!',
-	'^(\s+)?!creator\s+@?thathumandude(\s+)?$':
+	'(?i)^(\s+)?!creator\s+@?thathumandude(\s+)?$':
 		'/me was created by ' + nick_mono + '.',
-	'^(?:\s+)?!error\s+@?thathumandude(?:\s+)?(.*)$':
+	'(?i)^(?:\s+)?!error\s+@?thathumandude(?:\s+)?(.*)$':
 		add_error,
-	'^(\s+)?!checkerrors\s+@?thathumandude(\s+)?$':
+	'(?i)^(\s+)?!checkerrors\s+@?thathumandude(\s+)?$':
 		check_errors,
-	'^(\s+)?!uptime\s+@?thathumandude(\s+)?$':
+	'(?i)^(\s+)?!uptime\s+@?thathumandude(\s+)?$':
 		uptime,
-	'^(\s+)?!kill\s+@?thathumandude(\s+)?$':
+	'(?i)^(\s+)?!kill\s+@?thathumandude(\s+)?$':
 		kill
 }
 
