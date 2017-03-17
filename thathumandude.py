@@ -53,4 +53,4 @@ regexes = {
 }
 
 if __name__ == '__main__':
-		run_minibot(botname = bot_nick, nickname = bot_nick, regexes = regexes)
+		run_minibot(botname = bot_nick, nickname = bot_nick, do_uptime = False, regexes = regexes)
