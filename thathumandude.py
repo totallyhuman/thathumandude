@@ -10,24 +10,24 @@ def inbox(match, meta):
 
 def facepalm(match, meta):
 	if randint(1, 20) == 1:
-		meta['self'].send_chat('Stop hitting yourself!', meta['msgid'])
+		return 'Stop hitting yourself!'
 
 def uptime(match, meta):
-	meta['self'].send_chat('/me has been up since %s (%s).' % (
-		format_datetime(meta['self'].started, False),
-		format_delta(time.time() - meta['self'].started), False), meta['msgid'])
+	started = format_datetime(meta['self'].started, False)
+	since = format_delta(time.time() - meta['self'].started, False)
+	return '/me has been up since %s (%s).' % (str(started), str(since))
 
 def add_error(match, meta):
 	errors.append({'sender': meta['sender'], 'message': match.group(1), 'time': time.time()})
-	meta['self'].send_chat('Thank you for your feedback. Message will be delivered to ' + nick_mono + '.', meta['msgid'])
+	return 'Thank you for your feedback. Message will be delivered to ' + nick_mono + '.'
 	
 def check_errors(match, meta):
 	if meta['sender'] == nick_mono or meta['sender'] == ':3':
 		for e in range(0, len(errors)):
-			meta['self'].send_chat('[' + errors[e]['sender'] + ', ' + str(format_delta(time.time() - errors[e]['time'], False)) + '] ' + errors[e]['message'], meta['msgid'])
+			meta['self'].send_chat('[' + errors[e]['sender'] + ', ' + str(format_delta(time.time() - errors[e]['time'], False)) + ' ago] ' + errors[e]['message'], meta['msgid'])
 			del errors[e]
 	else:
-		meta['self'].send_chat('Why do you care? It\'s not your bot. :P', meta['msgid'])
+		return 'Why do you care? It\'s not your bot. :P'
 	
 def kill(match, meta):
 	meta['self'].send_chat('/me is exiting.', meta['msgid'])
